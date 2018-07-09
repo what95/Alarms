@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.magnusmain.alarms.model.NyAlarm;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
