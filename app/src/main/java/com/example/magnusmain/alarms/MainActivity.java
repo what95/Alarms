@@ -4,19 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.magnusmain.alarms.adapter.NotatRecycleAdapter;
+import com.example.magnusmain.alarms.model.Alarmer;
+
 public class MainActivity extends AppCompatActivity {
 
+    private RecyclerView mRecyclerView;
+    
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.example.magnusmain.alarms.R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(com.example.magnusmain.alarms.R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(com.example.magnusmain.alarms.R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +33,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(nyAlarm);
             }
         });
+        
+        setUpRecycle();
+    }
+
+    public void setUpRecycle(){
+        mRecyclerView = findViewById(R.id.recycleViewet);
+        NotatRecycleAdapter adapter = new NotatRecycleAdapter(this, Alarmer.getAlarmListe());
+        mRecyclerView.setAdapter(adapter);
+        LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
+        mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mLinearLayoutManagerVertical);
     }
 
     @Override

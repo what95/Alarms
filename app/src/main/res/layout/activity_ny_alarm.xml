@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/magDesign"
     tools:context=".NyAlarm">
 
     <LinearLayout
@@ -13,12 +14,12 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/alarmNavn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="@string/name" />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -30,22 +31,29 @@
                 android:layout_height="wrap_content">
 
                 <CheckBox
-                    android:id="@+id/checkBox8"
+                    android:id="@+id/mandagCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mandag" />
+                    android:text="@string/mandag" />
 
                 <CheckBox
-                    android:id="@+id/checkBox7"
+                    android:id="@+id/tirsdagCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tirsdag" />
+                    android:text="@string/tirsdag" />
 
                 <CheckBox
-                    android:id="@+id/checkBox6"
+                    android:id="@+id/onsdagCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Onsdag" />
+                    android:text="@string/onsdag" />
+
+                <CheckBox
+                    android:id="@+id/torsdagCheck"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/torsdag" />
 
             </LinearLayout>
 
@@ -55,72 +63,63 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/checkBox4"
+                    android:id="@+id/fredagCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Fredag" />
+                    android:text="@string/fredag" />
 
                 <CheckBox
-                    android:id="@+id/checkBox5"
+                    android:id="@+id/lordagCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Torsdag" />
+                    android:text="@string/l_rdag" />
 
                 <CheckBox
-                    android:id="@+id/checkBox3"
+                    android:id="@+id/sondagCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Lørdag" />
-
-                <CheckBox
-                    android:id="@+id/checkBox2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Søndag" />
+                    android:text="@string/s_ndag" />
             </LinearLayout>
 
         </RadioGroup>
-
-        <Button
-            android:id="@+id/velgTidKnapp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="velgTid"
-            android:text="Velg Tid"
-            tools:layout_editor_absoluteY="224dp" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="tidValgt"
-            android:text="Button" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/velgTidKnapp"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="velgTid"
+                android:text="@string/velg_tid"
+                tools:layout_editor_absoluteY="224dp" />
+
             <EditText
                 android:id="@+id/tidValgVisning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:editable="false"
                 android:ems="10"
                 android:enabled="false"
-                android:inputType="none|time" />
+                android:inputType="none|datetime"
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <Button
             android:id="@+id/lagreAlarm"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lagre Alarm" />
+            android:onClick="lagAlarm"
+            android:text="@string/lagre_alarm" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

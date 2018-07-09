@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="mprimary_material_light">#04f4e0</color>
+    <color name="mprimary_dark_material_light">#b2e0dc</color>
+    <color name="maccent_material_light">#056259</color>
+    <color name="mforeground_material_light">#343d3c</color>
 </resources>

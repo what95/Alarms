@@ -4,4 +4,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="mandag">Mandag</string>
+    <string name="tirsdag">Tirsdag</string>
+    <string name="onsdag">Onsdag</string>
+    <string name="fredag">Fredag</string>
+    <string name="l_rdag">Lørdag</string>
+    <string name="s_ndag">Søndag</string>
+    <string name="velg_tid">Velg Tid</string>
+    <string name="lagre_alarm">Lagre Alarm</string>
+    <string name="torsdag">Torsdag</string>
+    <string name="dummy_text">Dummy Text</string>
+    <string name="dette_er_en_knapp_som_sletter_lagd_alarm">Dette er en knapp som sletter lagd alarm</string>
 </resources>
