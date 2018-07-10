@@ -15,7 +15,7 @@
         tools:layout_editor_absoluteX="0dp">
 
         <EditText
-            android:id="@+id/alarmNavn"
+            android:id="@+id/alarmNavnVisning"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -40,6 +40,7 @@
                 android:id="@+id/tirsdagCheck"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:checked="false"
                 android:hint="tirsdag"
                 android:text="@string/tirsdag"
                 app:layout_constraintStart_toEndOf="@+id/mandagCheck"

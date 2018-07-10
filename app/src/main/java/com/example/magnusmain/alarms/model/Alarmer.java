@@ -7,12 +7,12 @@ public class Alarmer {
     private Integer alarmTime;
     private Integer alarmMinutt;
     private String alarmNavn;
-    private ArrayList<String> alarmDager;
+    private ArrayList<CharSequence> alarmDager;
 
     private static ArrayList<Alarmer> alarmListe = new ArrayList<>();
 
     //her lager vi alarm objekter
-    public Alarmer(String alarmNavn, ArrayList<String> alarmDager, int alarmTime, int alarmMinutt) {
+    public Alarmer(String alarmNavn, ArrayList<CharSequence> alarmDager, int alarmTime, int alarmMinutt) {
         System.out.println("Lager en Alarm objekt");
         this.alarmNavn = alarmNavn;
         this.alarmDager = alarmDager;
@@ -38,11 +38,11 @@ public class Alarmer {
         this.alarmMinutt = alarmMinutt;
     }
 
-    public ArrayList<String> getAlarmDager() {
+    public ArrayList<CharSequence> getAlarmDager() {
         return alarmDager;
     }
 
-    public void setAlarmDager(ArrayList<String> alarmDager) {
+    public void setAlarmDager(ArrayList<CharSequence> alarmDager) {
         this.alarmDager = alarmDager;
     }
 

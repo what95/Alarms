@@ -27,8 +27,47 @@ public class NyAlarm extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.magnusmain.alarms.R.layout.activity_ny_alarm);
+        setContentView(R.layout.activity_ny_alarm);
         tomVisTid();
+        if(!getGetAlarmTider().isEmpty()){
+            //Hvis du har valgt å endre en ekstiterende alarm, så triggres denne koden
+            TextView castAlarmNavn = findViewById(R.id.alarmNavnVisning);
+            TextView castAlarmTid = findViewById(R.id.tidValgVisning);
+            castAlarmNavn.setText(getGetAlarmTider().get(0).getAlarmNavn());
+            castAlarmTid.setText(getGetAlarmTider().get(0).getAlarmTime()+":"+getGetAlarmTider().get(0).getAlarmMinutt());
+
+            alarmTider = TimePicker.getTidValgtListe();
+            alarmTider.clear();
+            alarmTider.add(getGetAlarmTider().get(0).getAlarmTime());
+            alarmTider.add(getGetAlarmTider().get(0).getAlarmMinutt());
+
+            ArrayList<String> alarmDager = new ArrayList<>();
+
+            ConstraintLayout radioGroup = findViewById(R.id.dagersomervalgt);
+            int count = radioGroup.getChildCount();
+            int count2 = getGetAlarmTider().get(0).getAlarmDager().size();
+            System.out.println("Legger til verdiene til valgt Alarm");
+            ArrayList<CheckBox> listOfRadioButtons = new ArrayList<>();
+            for(int e=0;e<count2; e++) {
+                for (int i=0; i<count; i++) {
+                    View o = radioGroup.getChildAt(i);
+                    System.out.println("Sammenlingner: "+
+                            getGetAlarmTider().get(0).getAlarmDager().get(e).getClass()+
+                            " "+
+                            getGetAlarmTider().get(0).getAlarmDager().get(e)+
+                            " og "+
+                            getGetAlarmTider().get(0).getAlarmDager().get(e).getClass()+
+                            " "+
+                            ((CheckBox) o).getHint());
+                    if(getGetAlarmTider().get(0).getAlarmDager().get(e).equals(((CheckBox) o).getHint())){
+                        System.out.println("WOWOWOWOWOWOOWOWOWOWOWO");
+                        ((CheckBox) o).setChecked(true);
+
+                    }
+                }
+            }
+            getGetAlarmTider().clear();
+        }
     }
 
     private void tomVisTid() {
@@ -64,7 +103,18 @@ public class NyAlarm extends AppCompatActivity {
     }
     //Lag en ny alarm
     public void lagAlarm(View v){
-        if(alarmTider.isEmpty() || ((EditText) findViewById(R.id.alarmNavn)).getText().toString().equals("") || TimePicker.getTidValgtListe().isEmpty()){
+        int tempI = 0;
+        ConstraintLayout radioGroup = findViewById(R.id.dagersomervalgt);
+        int count = radioGroup.getChildCount();
+
+        for(int i=0;i<count;i++){
+            View o = radioGroup.getChildAt(i);
+            if(((CheckBox)o).isChecked()){
+                tempI++;
+            }
+        }
+
+        if(alarmTider.isEmpty() || ((EditText) findViewById(R.id.alarmNavnVisning)).getText().toString().equals("") || TimePicker.getTidValgtListe().isEmpty() || tempI==0){
             System.out.println("Noe returnerte en NULL");
             //Starting a new Intent
             Intent nyAlarm = new Intent(getApplicationContext(), MainActivity.class);
@@ -73,11 +123,7 @@ public class NyAlarm extends AppCompatActivity {
 
         }
         else{
-            ArrayList<String> alarmDager = new ArrayList<>();
-
-            ConstraintLayout radioGroup = findViewById(R.id.dagersomervalgt);
-            int count = radioGroup.getChildCount();
-            System.out.println(count);
+            ArrayList<CharSequence> alarmDager = new ArrayList<>();
             ArrayList<CheckBox> listOfRadioButtons = new ArrayList<>();
             for (int i=0;i<count;i++) {
                 View o = radioGroup.getChildAt(i);
@@ -90,11 +136,11 @@ public class NyAlarm extends AppCompatActivity {
             System.out.println("you have "+listOfRadioButtons.size()+" radio buttons");
 
             for(CheckBox e : listOfRadioButtons){
-                alarmDager.add((String) e.getHint());
-                System.out.println((String) e.getHint());
+                alarmDager.add(e.getHint());
+                System.out.println(e.getHint());
             }
 
-            new Alarmer(((EditText) findViewById(R.id.alarmNavn)).getText().toString(), alarmDager, alarmTider.get(0), alarmTider.get(1));
+            new Alarmer(((EditText) findViewById(R.id.alarmNavnVisning)).getText().toString(), alarmDager, alarmTider.get(0), alarmTider.get(1));
             //Starting a new Intent
             Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(mainActivity);

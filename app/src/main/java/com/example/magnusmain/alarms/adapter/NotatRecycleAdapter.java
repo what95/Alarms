@@ -105,6 +105,7 @@ public class NotatRecycleAdapter extends RecyclerView.Adapter<NotatRecycleAdapte
                     case R.id.img_endreKnappen:
                         //TODO legge til logikk for å endre en lagd alarm
                         endreItem(position);
+                        removeItem(position);
                         break;
                 }
                 Log.i("onClick after operation", mData.size() + "");
