@@ -34,20 +34,19 @@ public class NyAlarm extends AppCompatActivity {
             TextView castAlarmNavn = findViewById(R.id.alarmNavnVisning);
             TextView castAlarmTid = findViewById(R.id.tidValgVisning);
             castAlarmNavn.setText(getGetAlarmTider().get(0).getAlarmNavn());
-            castAlarmTid.setText(getGetAlarmTider().get(0).getAlarmTime()+":"+getGetAlarmTider().get(0).getAlarmMinutt());
+            castAlarmTid.setText(getGetAlarmTider().get(0).getAlarmTime()+
+                    ":"+
+                    getGetAlarmTider().get(0).getAlarmMinutt());
 
             alarmTider = TimePicker.getTidValgtListe();
             alarmTider.clear();
             alarmTider.add(getGetAlarmTider().get(0).getAlarmTime());
             alarmTider.add(getGetAlarmTider().get(0).getAlarmMinutt());
 
-            ArrayList<String> alarmDager = new ArrayList<>();
-
             ConstraintLayout radioGroup = findViewById(R.id.dagersomervalgt);
             int count = radioGroup.getChildCount();
             int count2 = getGetAlarmTider().get(0).getAlarmDager().size();
             System.out.println("Legger til verdiene til valgt Alarm");
-            ArrayList<CheckBox> listOfRadioButtons = new ArrayList<>();
             for(int e=0;e<count2; e++) {
                 for (int i=0; i<count; i++) {
                     View o = radioGroup.getChildAt(i);
@@ -60,7 +59,7 @@ public class NyAlarm extends AppCompatActivity {
                             " "+
                             ((CheckBox) o).getHint());
                     if(getGetAlarmTider().get(0).getAlarmDager().get(e).equals(((CheckBox) o).getHint())){
-                        System.out.println("WOWOWOWOWOWOOWOWOWOWOWO");
+                        System.out.println(((CheckBox) o).getHint()+" Har blitt huket av");
                         ((CheckBox) o).setChecked(true);
 
                     }
