@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Alarms</string>
     <string name="action_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="name">Name</string>
+    <string name="name">Navn</string>
     <string name="mandag">Mandag</string>
     <string name="tirsdag">Tirsdag</string>
     <string name="onsdag">Onsdag</string>
@@ -16,4 +14,6 @@
     <string name="torsdag">Torsdag</string>
     <string name="dummy_text">Dummy Text</string>
     <string name="dette_er_en_knapp_som_sletter_lagd_alarm">Dette er en knapp som sletter lagd alarm</string>
+    <string name="dennevisertidensomervalgt">Velg tid</string>
+    <string name="_10_40">10:40</string>
 </resources>

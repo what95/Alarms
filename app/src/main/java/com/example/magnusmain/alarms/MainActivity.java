@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.example.magnusmain.alarms.adapter.NotatRecycleAdapter;
 import com.example.magnusmain.alarms.model.Alarmer;
@@ -16,8 +17,7 @@ import com.example.magnusmain.alarms.model.Alarmer;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,13 +27,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Starting a new Intent
-                Intent nyAlarm = new Intent(getApplicationContext(), NyAlarm.class);
-
-                startActivity(nyAlarm);
+                nyAlarmIntent();
             }
         });
-        
         setUpRecycle();
     }
 
@@ -64,7 +60,12 @@ public class MainActivity extends AppCompatActivity {
         if (id == com.example.magnusmain.alarms.R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    public void nyAlarmIntent(){
+        //Starting a new Intent
+        Intent nyAlarm = new Intent(getApplicationContext(), NyAlarm.class);
+        startActivity(nyAlarm);
     }
 }
