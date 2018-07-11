@@ -3,24 +3,24 @@ package com.example.magnusmain.alarms.fragments;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
-import com.example.magnusmain.alarms.NyAlarm;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 
 public class TimePicker extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-    public static ArrayList<Integer> tidValgtListe = new ArrayList<Integer>();
+    private static final ArrayList<Integer> tidValgtListe = new ArrayList<>();
 
     public TimePicker() {
         // Required empty public constructor
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker
-
         final Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
@@ -34,7 +34,6 @@ public class TimePicker extends DialogFragment implements TimePickerDialog.OnTim
         tidValgtListe.clear();
         tidValgtListe.add(hourOfDay);
         tidValgtListe.add(minute);
-
     }
 
     //getter for tidValgtListe

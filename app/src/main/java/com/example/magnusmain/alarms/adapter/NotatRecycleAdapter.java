@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.List;
-
 import com.example.magnusmain.alarms.NyAlarm;
 import com.example.magnusmain.alarms.R;
 import com.example.magnusmain.alarms.model.Alarmer;
@@ -19,11 +18,11 @@ import static android.view.LayoutInflater.*;
 import static com.example.magnusmain.alarms.NyAlarm.getGetAlarmTider;
 
 public class NotatRecycleAdapter extends RecyclerView.Adapter<NotatRecycleAdapter.KortViewHolder> {
-        private List<Alarmer> mData;
-        private LayoutInflater mInflater;
-        private Context mcon;
+        private final List<Alarmer> mData;
+        private final LayoutInflater mInflater;
+        private final Context mcon;
 
-        public NotatRecycleAdapter(Context context, List<Alarmer> data) {
+        public NotatRecycleAdapter(Context context) {
             this.mData = Alarmer.getAlarmListe();
             this.mInflater = from(context);
             mcon = context;
@@ -66,10 +65,10 @@ public class NotatRecycleAdapter extends RecyclerView.Adapter<NotatRecycleAdapte
 
         class KortViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-            TextView teksten;
+            final TextView teksten;
             ImageView sletteKnapp;
             ImageView endreKnappen;
-            TextView alarmTid;
+            final TextView alarmTid;
             int position;
 
             private KortViewHolder(View itemView) {
@@ -84,7 +83,8 @@ public class NotatRecycleAdapter extends RecyclerView.Adapter<NotatRecycleAdapte
                 //Setter dataene til hvert kort
 
                 this.teksten.setText(current.getAlarmNavn());
-                this.alarmTid.setText(current.getAlarmTime()+":"+current.getAlarmMinutt());
+                String tString = current.getAlarmTime()+":"+current.getAlarmMinutt();
+                this.alarmTid.setText(tString);
                 this.position = position;
                 sletteKnapp = itemView.findViewById(R.id.img_slettKnapp);
                 endreKnappen = itemView.findViewById(R.id.img_endreKnappen);

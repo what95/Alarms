@@ -10,18 +10,14 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.magnusmain.alarms.adapter.NotatRecycleAdapter;
-import com.example.magnusmain.alarms.model.Alarmer;
 
 public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.example.magnusmain.alarms.R.layout.activity_main);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(com.example.magnusmain.alarms.R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
         setUpRecycle();
     }
 
-    public void setUpRecycle(){
-        mRecyclerView = findViewById(R.id.recycleViewet);
-        NotatRecycleAdapter adapter = new NotatRecycleAdapter(this, Alarmer.getAlarmListe());
+    private void setUpRecycle(){
+        RecyclerView mRecyclerView = findViewById(R.id.recycleViewet);
+        NotatRecycleAdapter adapter = new NotatRecycleAdapter(this);
         mRecyclerView.setAdapter(adapter);
         LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(this);
         mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
@@ -61,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void nyAlarmIntent(){
+    private void nyAlarmIntent(){
         //Starting a new Intent
         Intent nyAlarm = new Intent(getApplicationContext(), NyAlarm.class);
         startActivity(nyAlarm);

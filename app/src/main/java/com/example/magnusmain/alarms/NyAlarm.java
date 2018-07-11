@@ -11,15 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.example.magnusmain.alarms.fragments.TimePicker;
 import com.example.magnusmain.alarms.model.Alarmer;
-
 import java.util.ArrayList;
 
 public class NyAlarm extends AppCompatActivity {
 
-    ArrayList<Integer> alarmTider;
+    private ArrayList<Integer> alarmTider;
 
-    //Temp storage for alarm objekter som skal endres
-    public static ArrayList<Alarmer> getAlarmTider = new ArrayList<>();
+    //Her blir alarm objekter som skal endres flyttet til
+    private static final ArrayList<Alarmer> getAlarmTider = new ArrayList<>();
     public static ArrayList<Alarmer> getGetAlarmTider() {
         return getAlarmTider;
     }
@@ -29,20 +28,20 @@ public class NyAlarm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ny_alarm);
         tomVisTid();
+        //Hvis du har valgt å endre en ekstiterende alarm, så triggres denne koden
         if(!getGetAlarmTider().isEmpty()){
-            //Hvis du har valgt å endre en ekstiterende alarm, så triggres denne koden
             TextView castAlarmNavn = findViewById(R.id.alarmNavnVisning);
             TextView castAlarmTid = findViewById(R.id.tidValgVisning);
             castAlarmNavn.setText(getGetAlarmTider().get(0).getAlarmNavn());
-            castAlarmTid.setText(getGetAlarmTider().get(0).getAlarmTime()+
+            String tString = getGetAlarmTider().get(0).getAlarmTime()+
                     ":"+
-                    getGetAlarmTider().get(0).getAlarmMinutt());
+                    getGetAlarmTider().get(0).getAlarmMinutt();
+            castAlarmTid.setText(tString);
 
             alarmTider = TimePicker.getTidValgtListe();
             alarmTider.clear();
             alarmTider.add(getGetAlarmTider().get(0).getAlarmTime());
             alarmTider.add(getGetAlarmTider().get(0).getAlarmMinutt());
-
             ConstraintLayout radioGroup = findViewById(R.id.dagersomervalgt);
             int count = radioGroup.getChildCount();
             int count2 = getGetAlarmTider().get(0).getAlarmDager().size();
@@ -61,7 +60,6 @@ public class NyAlarm extends AppCompatActivity {
                     if(getGetAlarmTider().get(0).getAlarmDager().get(e).equals(((CheckBox) o).getHint())){
                         System.out.println(((CheckBox) o).getHint()+" Har blitt huket av");
                         ((CheckBox) o).setChecked(true);
-
                     }
                 }
             }
@@ -76,7 +74,6 @@ public class NyAlarm extends AppCompatActivity {
     }
 
     public void velgTid(View view) {
-
         DialogFragment newFragment  = new TimePicker();
         String tag = "timePicker";
         newFragment.show(getSupportFragmentManager(), tag);
@@ -88,7 +85,7 @@ public class NyAlarm extends AppCompatActivity {
         tidValgt();
     }
 
-    public void tidValgt(){
+    private void tidValgt(){
         alarmTider = TimePicker.getTidValgtListe();
         TextView visTidSomErValgt = findViewById(R.id.tidValgVisning);
         try{
@@ -98,8 +95,8 @@ public class NyAlarm extends AppCompatActivity {
         catch(IndexOutOfBoundsException ex){
             System.out.println();
         }
-
     }
+
     //Lag en ny alarm
     public void lagAlarm(View v){
         int tempI = 0;
@@ -118,8 +115,6 @@ public class NyAlarm extends AppCompatActivity {
             //Starting a new Intent
             Intent nyAlarm = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(nyAlarm);
-
-
         }
         else{
             ArrayList<CharSequence> alarmDager = new ArrayList<>();
@@ -144,8 +139,5 @@ public class NyAlarm extends AppCompatActivity {
             Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(mainActivity);
         }
-
-
     }
-
 }

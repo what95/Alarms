@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Alarmer {
 
-    private Integer alarmTime;
-    private Integer alarmMinutt;
-    private String alarmNavn;
-    private ArrayList<CharSequence> alarmDager;
+    private final Integer alarmTime;
+    private final Integer alarmMinutt;
+    private final String alarmNavn;
+    private final ArrayList<CharSequence> alarmDager;
 
-    private static ArrayList<Alarmer> alarmListe = new ArrayList<>();
+    private static final ArrayList<Alarmer> alarmListe = new ArrayList<>();
 
     //her lager vi alarm objekter
     public Alarmer(String alarmNavn, ArrayList<CharSequence> alarmDager, int alarmTime, int alarmMinutt) {
@@ -26,32 +26,16 @@ public class Alarmer {
         return alarmNavn;
     }
 
-    public void setAlarmNavn(String alarmNavn) {
-        this.alarmNavn = alarmNavn;
-    }
-
     public Integer getAlarmMinutt() {
         return alarmMinutt;
-    }
-
-    public void setAlarmMinutt(Integer alarmMinutt) {
-        this.alarmMinutt = alarmMinutt;
     }
 
     public ArrayList<CharSequence> getAlarmDager() {
         return alarmDager;
     }
 
-    public void setAlarmDager(ArrayList<CharSequence> alarmDager) {
-        this.alarmDager = alarmDager;
-    }
-
     public Integer getAlarmTime() {
         return alarmTime;
-    }
-
-    public void setAlarmTime(Integer alarmTime) {
-        this.alarmTime = alarmTime;
     }
 
     public static ArrayList<Alarmer> getAlarmListe() {
