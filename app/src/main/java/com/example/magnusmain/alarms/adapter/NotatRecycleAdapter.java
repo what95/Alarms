@@ -10,7 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.IOException;
 import java.util.List;
+
+import com.example.magnusmain.alarms.MainActivity;
 import com.example.magnusmain.alarms.NyAlarm;
 import com.example.magnusmain.alarms.R;
 import com.example.magnusmain.alarms.model.Alarmer;
@@ -101,11 +105,21 @@ public class NotatRecycleAdapter extends RecyclerView.Adapter<NotatRecycleAdapte
                 switch (v.getId()) {
                     case R.id.img_slettKnapp:
                         removeItem(position);
+                        try {
+                            MainActivity.lagreStuff();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case R.id.img_endreKnappen:
                         //TODO legge til logikk for å endre en lagd alarm
                         endreItem(position);
                         removeItem(position);
+                        try {
+                            MainActivity.lagreStuff();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         break;
                 }
                 Log.i("onClick after operation", mData.size() + "");

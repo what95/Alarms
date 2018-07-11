@@ -1,15 +1,16 @@
 package com.example.magnusmain.alarms.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Alarmer {
+public class Alarmer implements Serializable {
 
     private final Integer alarmTime;
     private final Integer alarmMinutt;
     private final String alarmNavn;
     private final ArrayList<CharSequence> alarmDager;
 
-    private static final ArrayList<Alarmer> alarmListe = new ArrayList<>();
+    private static ArrayList<Alarmer> alarmListe = new ArrayList<>();
 
     //her lager vi alarm objekter
     public Alarmer(String alarmNavn, ArrayList<CharSequence> alarmDager, int alarmTime, int alarmMinutt) {

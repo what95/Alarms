@@ -1,5 +1,6 @@
 package com.example.magnusmain.alarms;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,21 +11,51 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.magnusmain.alarms.adapter.NotatRecycleAdapter;
+import com.example.magnusmain.alarms.model.Alarmer;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+private static boolean sBool = true;
+static Context obj;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.example.magnusmain.alarms.R.layout.activity_main);
+        obj = this;
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    lagreStuff();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 nyAlarmIntent();
             }
         });
         setUpRecycle();
+        while (sBool){
+            try {
+                leseLagret();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            sBool = false;
+        }
+        try {
+            lagreStuff();
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void setUpRecycle(){
@@ -61,5 +92,39 @@ public class MainActivity extends AppCompatActivity {
         //Starting a new Intent
         Intent nyAlarm = new Intent(getApplicationContext(), NyAlarm.class);
         startActivity(nyAlarm);
+    }
+
+    public static void lagreStuff() throws IOException {
+        ObjectOutputStream out = null;
+        try {
+            out = new ObjectOutputStream(
+                    new FileOutputStream(obj.getFilesDir() +"/alarmer.ser")
+            );
+            System.out.println("Lagret myarray");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert out != null;
+        out.writeObject(Alarmer.getAlarmListe());
+        try {
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        out.close();
+    }
+
+    private void leseLagret() throws IOException {
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(getFilesDir() +"/alarmer.ser"));
+        try {
+            ArrayList<Alarmer> tempArray = (ArrayList) in.readObject();
+            for(Alarmer alarm: tempArray){
+                Alarmer.getAlarmListe().add(alarm);
+            }
+            System.out.println("Henter lagret");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        in.close();
     }
 }
