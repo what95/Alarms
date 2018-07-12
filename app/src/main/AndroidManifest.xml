@@ -20,6 +20,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".NyAlarm" />
+
+        <service
+            android:name=".service.MyService"
+            android:label="AlarmTriggerService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            />
     </application>
 
 </manifest>

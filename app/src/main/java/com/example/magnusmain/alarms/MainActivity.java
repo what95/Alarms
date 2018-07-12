@@ -12,8 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.example.magnusmain.alarms.adapter.NotatRecycleAdapter;
 import com.example.magnusmain.alarms.model.Alarmer;
+import com.example.magnusmain.alarms.service.MyService;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,6 +29,8 @@ static Context obj;
         super.onCreate(savedInstanceState);
         setContentView(com.example.magnusmain.alarms.R.layout.activity_main);
         obj = this;
+        Intent service = new Intent(getApplicationContext(), MyService.class);
+        startService(service);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
